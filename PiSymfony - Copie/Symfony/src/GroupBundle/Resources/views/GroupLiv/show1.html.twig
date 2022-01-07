@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+{% block css %}
+{% endblock %}
+{% block NavName %} Groups {% endblock %}
+{% block body %}
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Add new group
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    {{ form_start(form) }}
+
+                </div>
+                <div class="modal-footer">
+                    {{ form_widget(form) }}
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a href="{{ path("show_groups")}}">
+                    <button type="submit" class="btn btn-primary">Add group</button>
+                    </a>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Destination</th>
+        <th scope="col">Rating</th>
+        <th scope="col">Details</th>
+        <th scope="col">Join</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% set i=1 %}
+    {% for g in group %}
+    <tr>
+        <th scope="row">{{i}}</th>
+        <td>{{g.name}}</td>
+        <td>{{g.destination}}</td>
+        <td>{{g.rating}}</td>
+        <th>
+            <a href="{{ path("details", {"id":g.idGroup}) }}">
+                <button>Details</button>
+            </a>
+        </th>
+        <th>
+            <a href="{{ path("join",{"gid":g.idgroup}) }}">
+                <button>Join</button>
+            </a>
+        </th>
+    </tr>
+        {% set i = i+1 %}
+    {% endfor %}
+    </tbody>
+    </table>
+    {# display navigation #}
+    <div class="navigation">
+        {{ knp_pagination_render(group) }}
+    </div>
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends '@FOSMessage/layout.html.twig' %}
+
+{% block fos_message_content %}
+<div class="">
+<h2 style="margin-left:15px;float:left;">My Inbox</h2>
+
+<a style="float:left;margin-top:30px;font-size:30px;margin-left:10px;" href="{{ url('fos_message_thread_new' )}}">{% trans from 'FOSMessageBundle' %}<i class="fa fa-envelope" aria-hidden="true"></i><span style="margin-left:15px;font-size:0.5em">Add New Message</span>{% endtrans %}</a> 
+</div>
+
+{% include '@FOSMessage/Message/threads_list.html.twig' with {'threads': threads} %}
+
+{% endblock %}

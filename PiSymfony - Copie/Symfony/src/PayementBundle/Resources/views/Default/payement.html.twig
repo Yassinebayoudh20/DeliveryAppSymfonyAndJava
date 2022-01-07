@@ -1,0 +1,62 @@
+{% extends "base.html.twig" %}
+{% block NavName %} Register Card {% endblock %}
+ {% block body %}
+     <div class="container">
+         <h2 class="my-4 text-center">Register Credit Card</h2>
+         {{ form_start(form, {attr: {id: form.vars.id}}) }}
+<div class="form-group">
+    <input type="text" name="first_name" class="form-control mb-3 StripeElement StripeElement--empty" placeholder="First Name">
+   <div class="form-group">
+<input type="text" name="last_name" class="form-control mb-3 StripeElement StripeElement--empty" placeholder="Last Name">
+</div>
+<div class="form-group">
+    <div id="card-element" class="form-control"></div>
+    </div>
+
+<div class="form-group">
+
+    <div id="card-errors" class="help-block" role="alert"></div>
+    </div>
+<div class="form-group">
+    <button type="submit" class="btn btn-primary form-control"><a href="{{ path('pay_show') }}">Add card</a></button>
+    </div>
+
+</div>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script type="text/javascript">
+        var form = document.getElementById('{{ form.vars.id }}');
+        var errors = document.getElementById('card-errors');
+        var stripe = Stripe('{{ stripe_public_key }}');
+        var elements = stripe.elements();
+        var card = elements.create('card');
+        card.mount('#card-element');
+        card.addEventListener('change', function(event) {
+            if (event.error) {
+                errors.textContent = event.error.message;
+                form.classList.add('has-error');
+            } else {
+                errors.textContent = '';
+                form.classList.remove('has-error');
+            }
+        });
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            stripe.createToken(card).then(function(result) {
+                if (result.error) {
+                    errors.textContent = result.error.message;
+                    form.classList.add('has-error');
+                } else {
+                    document.getElementById('{{ form.children.token.vars.id }}').setAttribute('value', result.token.id);
+                    form.submit();
+                }
+            });
+        });
+
+    </script>
+{{ form_widget(form.token) }}
+{{ form_end(form) }}
+     </div>
+ {% endblock %}
+
+
+

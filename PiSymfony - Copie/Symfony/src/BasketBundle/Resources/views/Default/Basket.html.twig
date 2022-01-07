@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    {% set total=0  %}
+    {% set nb=0  %}
+
+    <center>
+        <form method="POST" action="{{ url("searchPArNom") }}">
+            <label for="name">name : </label>
+            <input type="text" name="name">
+            <label for="quantite"> quantite</label>
+            <input type="text" name="quantite">
+            <input type="submit" value="search" class="btn btn-primary">
+        </form>
+    </center>
+    <table class="table">
+    <thead  class="thead-dark">
+    <tr>
+        <th scope="col">Image</th>
+        <th scope="col">Name</th>
+        <th scope="col">Quantité</th>
+        <th scope="col">poid</th>
+        <th scope="col">Prix Total  </th>
+    </tr>
+    </thead>
+    <tbody>
+    {%  for Entity in tobaskets %}
+        <tr>
+            <td class="invert-image"><a > <img src="{{ asset('imageProduits\\' ~ Entity.image) }} " style="width: 150px;height: 150px" class="img-thumbnail img-fluid" alt="" ></a></td>
+            <td>  {{ Entity.nom }} </td>
+            <td> {{ Entity.quantite }} </td>
+            <td> {{ Entity.poid }} </td>
+            <td >{{ Entity.prix }}</td>
+            <td >
+                <ul>
+                    <li>
+                        <button type="submit" class="btn btn-primary" ><a href="{{ path('delete_basket',{'id':Entity.id}) }}"style="color: white;">Delete</a></button>
+                    </li>
+                </ul>
+            </td>
+
+        </tr>
+
+            {% set nb= nb + 1 %}
+            {% set total= total + Entity.prix  %}
+
+    {% endfor %}
+
+            </tbody>
+            </table>
+
+
+    <li>Nombre de Produits : <span>{{   nb  }} Produits </span></li>
+    <li>Total : <span>{{   total  }} DT</span></li>
+
+    {%  for Entity in tobaskets %}
+    <button type="submit" class="btn btn-primary" ><a href="{{ path('sendmail',{'id':Entity.id}) }}"style="color: white;">Order</a></button>
+    {% endfor %}
+
+
+
+
+{% endblock %}
+
+

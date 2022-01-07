@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% block NavName %} Groups {% endblock %}
+{% block body %}
+<table border="2" class="table table-dark">
+    <tr>
+       <th scope="col">Name</th>
+       <th scope="col">Destination</th>
+       <th scope="col">Rating</th>
+       <th scope="col">Details</th>
+       <th scope="col">Join</th>
+    </tr>
+
+    {% for g in group %}
+        <tr>
+            <th>{{g.name}}</th>
+            <th>{{g.destination}}</th>
+            <th>{{g.rating}}</th>
+            <th>
+                <a href="{{ path("details", {"id":g.idGroup}) }}">
+                    <button>Details</button>
+                </a>
+            </th>
+            <th>
+                <a href="{{ path("join",{"gid":g.idgroup}) }}">
+                <button>Join</button>
+                </a>
+            </th>
+        </tr>
+    {% endfor %}
+
+</table>
+
+{% endblock %}

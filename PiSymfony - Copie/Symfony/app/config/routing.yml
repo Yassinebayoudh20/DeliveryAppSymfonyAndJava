@@ -1,0 +1,36 @@
+basket:
+    resource: "@BasketBundle/Controller/"
+    type:     annotation
+    prefix:   /basket
+
+group:
+    resource: "@GroupBundle/Controller/"
+    type:     annotation
+    prefix:   /group
+
+notification:
+    resource: "@NotificationBundle/Controller/"
+    type:     annotation
+    prefix:   /notif
+
+payement:
+    resource: "@PayementBundle/Controller/"
+    type:     annotation
+    prefix:   /payement
+
+
+User_Api:
+    resource: "@AppBundle/Controller/API"
+    type: annotation
+    prefix : /api
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+fos_message:
+    resource: "@FOSMessageBundle/Resources/config/routing.xml"
+    prefix: /messanger
+
+
+
+
+

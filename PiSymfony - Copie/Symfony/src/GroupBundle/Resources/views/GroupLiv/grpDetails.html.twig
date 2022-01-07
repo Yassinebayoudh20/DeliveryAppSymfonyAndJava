@@ -1,0 +1,242 @@
+{% extends 'base.html.twig' %}
+{% block css %}
+    <style>
+        body{
+            background-color: white;
+        }
+
+        td{
+            text-align: center;
+        }
+        .dropdown{
+            float: right;
+            margin-left: 50px;
+            height: 0;
+            bottom: 25px;
+        }
+        .dropdown-menu{
+            margin-top: 70px;
+        }
+
+
+
+    </style>
+
+{% endblock %}
+{% block NavName %}
+
+        Groups
+
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Options
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <button class="btn btn-next btn-fill btn-primary btn-wd dropdown-item " data-toggle="modal" data-target="#exampleModal">
+                        add new parcel
+                    </button>
+                    <button class="dropdown-item" type="button">Another action</button>
+                    <button class="dropdown-item" type="button">Something else here</button>
+                </div>
+            </div>
+{% endblock %}
+{% block body %}
+
+<div class=" set-full-height">
+
+        <a href="#">
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="{{asset('img/new_logo.png')}}">
+                </div>
+                <div class="brand" style="color: black">
+                    {{ group.name }}<br>
+                    {{ rate }}
+                </div>
+            </div>
+        </a>
+
+
+        <!--   Big container  -->
+
+
+            <div class="row">
+                <div class="container" >
+                    <!--   leave group button   -->
+                    <a href="{{ path("leave",{"gid":group.idgroup}) }}">
+                        <button class="btn btn-previous btn-fill btn-default btn-wd">
+                            Leave this group
+                        </button>
+                    </a>
+                    <!--   add new parcel button   -->
+
+
+
+                    <!--   add parcel form using modal   -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+                                    {{ form_start(formP) }}
+
+                                </div>
+                                <div class="modal-footer">
+                                    {{ form_widget(formP) }}
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                                        <button type="submit" class="btn btn-primary">Add group</button>
+
+                                    {{ form_end(formP) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                <div class="col-lg-10">
+                    <!--      Wizard container        -->
+                    <div class="wizard-container"  >
+                        <div class="card wizard-card" data-color="purple" id="wizard">
+                            <form action="" method="">
+                                <!--        You can switch " data-color="rose" "  with one of the next bright colors: "blue", "green", "orange", "purple"        -->
+
+                                <div class="wizard-header">
+                                    <h3 class="wizard-title">
+                                        {{ group.name }}
+                                    </h3>
+                                    <h5>This information will let us know more about your place.</h5>
+                                </div>
+                                <div class="wizard-navigation">
+                                    <ul>
+                                        <li><a href="#location" data-toggle="tab">Members list</a></li>
+                                        <li><a href="#type" data-toggle="tab">Parcels list</a></li>
+                                        <li><a href="#facilities" data-toggle="tab">What people said</a></li>
+                                        <li><a href="#description" data-toggle="tab">Give a feedback</a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="tab-content">
+                                    <div class="tab-pane" id="location">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <h4 class="info-text"> Check members of this group</h4>
+                                            </div>
+
+                                            <table class="table">
+
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Email</th>
+                                                    <th scope="col">Member since</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for m in members %}
+                                                <tr>
+                                                    <th scope="row">1</th>
+                                                    <td>{{ m.username }}</td>
+                                                    <td>{{ m.email }}</td>
+                                                    <td>{{ m.lastLogin|date('Y-m-d') }}</td>
+                                                </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="type">
+                                        <h4 class="info-text">Here you can check parcels posted to this group </h4>
+                                        <div class="row">
+
+                                            <table class="table">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Depart</th>
+                                                    <th scope="col">Destination</th>
+                                                    <th scope="col">Added at</th>
+                                                    <th scope="col">Date limit</th>
+                                                    <th scope="col">Label</th>
+                                                    <th scope="col">Reward</th>
+                                                    <th scope="col">Posted by</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for c in coli %}
+                                                <tr>
+
+                                                    <th scope="row">1</th>
+                                                    <td >{{ c.depart }}</td>
+                                                    <td >{{ c.destination }}</td>
+                                                    <td >{{ c.dateAjout|date('Y-m-d') }}</td>
+                                                    <td >{{ c.dateLimit }}</td>
+                                                    <td >{{ c.label }}</td>
+                                                    <td >{{ c.reward }}</td>
+                                                    <td >{{ c.idUtil }}</td>
+
+                                                </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="facilities">
+                                        <h4 class="info-text">Poeple feedbacks about this group </h4>
+                                        <div class="row">
+
+                                            users feedback
+
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="description">
+                                        <div class="row">
+                                            <h4 class="info-text"> Drop us a small description. </h4>
+                                            <div class="col-sm-6 col-sm-offset-1">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Place description</label>
+                                                    <textarea class="form-control" placeholder="" rows="9"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Example</label>
+                                                    <p class="description">"The place is really nice. We use it every sunday when we go fishing. It is so awesome."</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wizard-footer">
+                                    <div class="pull-right">
+                                        <input type='button' class='btn btn-next btn-fill btn-primary btn-wd' name='next' value='Next' />
+                                        <input type='button' class='btn btn-finish btn-fill btn-primary btn-wd' name='finish' value='Finish' />
+                                    </div>
+                                    <div class="pull-left">
+                                        <input type='button' class='btn btn-previous btn-fill btn-default btn-wd' name='previous' value='Previous' />
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div> <!-- wizard container -->
+            </div> <!-- row -->
+        </div> <!--  big container -->
+
+
+    </div>
+</div>
+
+
+{% endblock %}
+

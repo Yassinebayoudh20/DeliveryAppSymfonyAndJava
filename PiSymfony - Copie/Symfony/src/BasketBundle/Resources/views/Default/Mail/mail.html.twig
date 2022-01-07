@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table, th, td {
+            border: 1px solid #1C6EA4;
+            background-color: #EEEEEE;
+            width: 100%;
+            text-align: left;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 30px;
+            text-align: left;
+        }
+        table#t01 {
+            width: 100%;
+            background-color: #f1f1c1 ;}
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+
+        .myButton {
+            box-shadow: 3px 4px 0px 0px #899599;
+            background:linear-gradient(to bottom, #ededed 5%, #bab1ba 100%);
+            background-color:#ededed;
+            border-radius:15px;
+            border:1px solid #d6bcd6;
+            display:inline-block;
+            cursor:pointer;
+            color:#3a8a9e;
+            font-family:Arial;
+            font-size:17px;
+            padding:7px 25px;
+            text-decoration:none;
+            text-shadow:0px 1px 0px #e1e2ed;
+        }
+        .myButton:hover {
+            background:linear-gradient(to bottom, #bab1ba 5%, #ededed 100%);
+            background-color:#bab1ba;
+        }
+        .myButton:active {
+            position:relative;
+            top:1px;
+        }
+    </style>
+</head>
+
+<div><a> Greating </a>
+</div>
+<div>
+    <a> The product of {{ Entity.nom }} has been shipped to you</a></div>
+<div>
+    <a> This is the rest of the infomation </a>
+</div>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Quantité</th>
+        <th>poid</th>
+        <th>Prix</th>
+
+</table>
+
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr class="rem1">
+        <td > {{ Entity.nom }}</td>
+        <td > {{ Entity.quantite }}</td>
+        <td >{{ Entity.poid }}</td>
+        <td>{{ Entity.prix }} DT </td>
+    <tr/>
+
+
+    </tbody>
+</html>

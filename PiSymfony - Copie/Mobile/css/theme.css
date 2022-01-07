@@ -1,0 +1,55 @@
+#Constants {
+    includeNativeBool: true; 
+}
+
+  @font-face {
+    font-family: "FontAwesome";
+    src: url(github://FontAwesome/Font-Awesome/blob/master/fonts/fontawesome-webfont.ttf);
+}
+
+HomeButton {
+ 
+  background-color: #AE54AC;
+  border: none;
+  color: white;
+  border-radius: 20px;
+  padding: 100px 150px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 50px;
+  margin: 4px 4px;
+}
+
+CrudPagesButton{
+    background-color: #AE54AC;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  padding: 50px 50px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 50px;
+  margin: 4px 4px;
+}
+
+Button.pressed {
+    background-color: gray;
+}
+
+Label{
+    
+}
+
+MyTextField{
+      width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+
+
+
+
